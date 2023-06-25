@@ -1,0 +1,11 @@
+---
+- name: repository
+  hosts: node
+  roles:
+    - chrony
+- name: hadoop install
+  hosts: all
+  vars:
+  - hd:
+  roles:
+    - hp

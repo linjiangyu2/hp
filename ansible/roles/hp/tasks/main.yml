@@ -1,0 +1,59 @@
+---
+# tasks file for hp
+- name: host file
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+    force: yes
+- name: COPY HP
+  synchronize:
+    src: HD_HOME
+    dest: DST_HD
+  when: inventory_hostname in groups['node']
+- name: COPY JDK
+  synchronize:
+    src: JAVA_HOME
+    dest: DST_JA
+  when: inventory_hostname in groups['node']
+- name: profile
+  copy:
+    src: hp.sh
+    dest: /etc/profile.d/hp.sh
+- name: source
+  shell: "source /etc/profile.d/hp.sh"
+#- name: hadoop
+#  copy:
+#    src:
+#    dest:
+- name: hadoop env
+  template:
+    src: hadoop-env.j2 
+    dest: HD_HOME/etc/hadoop/hadoop-env.sh
+- name: yarn env
+  template:
+    src: yarn-env.j2
+    dest: HD_HOME/etc/hadoop/yarn-env.sh
+- name: slave
+  template:
+    src: slave.j2
+    dest: HD_HOME/etc/hadoop/slaves
+- name: core site
+  template:
+    src: core-site.j2
+    dest: HD_HOME/etc/hadoop/core-site.xml
+    force: yes
+- name: hdfs site
+  template:
+    src: hdfs-site.j2
+    dest: HD_HOME/etc/hadoop/hdfs-site.xml
+    force: yes
+- name: yarn site
+  template:
+    src: yarn-site.j2
+    dest: HD_HOME/etc/hadoop/yarn-site.xml
+    force: yes
+- name: mapred site
+  template:
+    src: mapred-site.j2
+    dest: HD_HOME/etc/hadoop/mapred-site.xml
+    force: yes

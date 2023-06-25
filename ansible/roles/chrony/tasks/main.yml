@@ -1,0 +1,10 @@
+---
+# tasks file for chrony
+- name: rm old repo
+  file:
+    path: /etc/yum.repos.d
+    state: absent
+- name: cy file
+  copy:
+    src: chrony.conf
+    dest: /etc/chrony.conf

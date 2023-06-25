@@ -1,0 +1,17 @@
+# hp KunTower conf file
+#
+JAVA_HOME: /usr/local/jdk
+
+#-------------------------hadoop------------------------#
+HADOOP:
+  master: ["192.168.222.32"]
+  nodes: ["192.168.222.33","192.168.222.34"]
+  ssh_online: true
+  ssh_pass: 'MTIzCg=='
+  home: /opt/hadoop285
+  listen: 9000
+  tmp: /opt/data
+  replica: 1
+  replica_dir: /opt/data/hdfs/name
+  node_data_dir: /opt/data/hdfs/data
+#------------------------hadoop------------------------#
